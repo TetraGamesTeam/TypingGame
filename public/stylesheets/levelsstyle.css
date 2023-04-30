@@ -1,0 +1,99 @@
+body {
+    background-image: url("/images/moroccan-flower-dark.webp");
+    background-repeat: repeat;
+    background-position: top center;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+main {
+    flex: 1 0 auto;
+    padding-bottom: 90px;
+    width: 100%;
+}
+
+.wrapper {
+    position: relative;
+    min-height: 100%;
+    height: fit-content;
+}
+
+.navbar {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    height: 75px;
+    width: 80vw;
+    position: fixed;
+    margin-left: 10vw;
+    margin-right: auto;
+    margin-bottom: 100px;
+    margin-top: 20px;
+    z-index: 1;
+    top: 0;
+}
+
+.logo {
+    height: 50px;
+    border-radius: 25px;
+    position: relative;
+    display: inline;
+    margin-left: 12.5px;
+    margin-right: 10px;
+    vertical-align: middle;
+    margin-top: 12.5px;
+    cursor: pointer;
+}
+
+.navbartext {
+    color: rgb(173, 173, 172);
+    font-family: 'PT Mono', monospace;
+    position: relative;
+    display: inline-block;
+    margin-left: 20px;
+    margin-right: 20px;
+    cursor: pointer;
+    vertical-align: middle;
+    margin-top: 12.5px;
+    text-shadow: 0px 2px 4px #000000;
+}
+
+.navicons {
+    height: 35px;
+    position: relative;
+    display: inline;
+    margin-right: 20px;
+    vertical-align: middle;
+    margin-top: 20px;
+    float: right;
+    cursor: pointer;
+  }
+
+
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    margin-top: 50px;
+    background-color: #1c2a53;
+}
+
+
+#footertext {
+    color: rgb(228, 228, 228);
+    font-family: 'PT Mono', monospace;
+    font-size: 15px;
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    margin-top: 40px;
+}

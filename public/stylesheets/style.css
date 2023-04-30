@@ -1,0 +1,209 @@
+body {
+  background-image: url("/images/moroccan-flower-dark.webp");
+  background-repeat: repeat;
+  background-position: top center;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+main {
+  flex: 1 0 auto;
+  padding-bottom: 90px;
+  width: 100%;
+}
+
+.wrapper {
+  position: relative;
+  min-height: 100%;
+  height: fit-content;
+}
+
+.navbar {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  height: 75px;
+  width: 80vw;
+  position: fixed;
+  margin-left: 10vw;
+  margin-right: auto;
+  margin-bottom: 100px;
+  margin-top: 20px;
+  z-index: 1;
+  top: 0;
+}
+
+.logo {
+  height: 50px;
+  border-radius: 25px;
+  position: relative;
+  display: inline;
+  margin-left: 12.5px;
+  margin-right: 10px;
+  vertical-align: middle;
+  margin-top: 12.5px;
+  cursor: pointer;
+}
+
+.navbartext {
+  color: rgb(173, 173, 172);
+  font-family: 'PT Mono', monospace;
+  position: relative;
+  display: inline-block;
+  margin-left: 20px;
+  margin-right: 20px;
+  cursor: pointer;
+  vertical-align: middle;
+  margin-top: 12.5px;
+  text-shadow: 0px 2px 4px #000000;
+}
+
+.infoboards {
+  margin-top: 150px;
+  width: 75vw;
+  height: fit-content;
+  margin-left: 12.5vw;
+  position: relative;
+}
+
+.infoboard {
+  width: 75vw;
+  height: fit-content;
+  position: relative;
+  z-index: 0;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.navicons {
+  height: 35px;
+  position: relative;
+  display: inline;
+  margin-right: 20px;
+  vertical-align: middle;
+  margin-top: 20px;
+  float: right;
+  cursor: pointer;
+}
+
+#text1{
+  color: rgb(228, 228, 228);
+  font-family: 'PT Mono', monospace;
+  font-size: 50px;
+  text-shadow: 0px 2px 4px #000000;
+}
+
+#text1 {
+  margin-left: 50px;
+}
+
+#text2 {
+  color: rgb(228, 228, 228);
+  font-family: 'PT Mono', monospace;
+  position: relative;
+  margin-left: 400px;
+  font-size: 30px;
+  margin-top: -20px;
+}
+
+#text3 {
+  color: rgb(228, 228, 228);
+  font-family: 'PT Mono', monospace;
+  font-size: 25px;
+  width: 60vw;
+  margin-left: 10vw;
+  hyphens: auto;
+}
+
+.infoboard h1 {
+  color: rgb(228, 228, 228);
+  font-family: 'PT Mono', monospace;
+  font-size: 40px;
+  width: 60vw;
+  margin-left: 5vw;
+}
+
+#getstarted {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  width: 15vw;
+  height: 50px;
+  color: rgb(228, 228, 228);
+  font-family: 'PT Mono', monospace;
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 30vw;
+  cursor: pointer;
+}
+
+.infoboard3tile {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  width: 18vw;
+  height: 40vh;
+  position: relative;
+  display: inline-block;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  margin-top: 50px;
+}
+
+#third {
+  padding-left: 9vw;
+}
+
+#thirdtext {
+  color: rgb(228, 228, 228);
+  font-family: 'PT Mono', monospace;
+  font-size: 20px;
+  text-align: center;
+}
+
+#thirdimage {
+  height: 200px;
+  position: relative;
+  display: inline;
+  vertical-align: middle;
+  cursor: pointer;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  margin-left: 4vw;
+}
+
+footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  margin-top: 50px;
+  background-color: #1c2a53;
+}
+
+#thirdtitletext {
+  margin-left: -4vw;
+}
+
+#footertext {
+  color: rgb(228, 228, 228);
+  font-family: 'PT Mono', monospace;
+  font-size: 15px;
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  margin-top: 40px;
+}
