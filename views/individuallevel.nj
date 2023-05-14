@@ -1,0 +1,102 @@
+{% extends 'levels.html' %}
+
+{% block content %}
+<head>
+	<title>HTML поле для ввода с проверкой</title>
+	<style>
+		.input-field {
+			font-size: 24px;
+			padding: 10px;
+			border: 1px solid black;
+			background-image: url('background.jpg');
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: center;
+		}
+		.green {
+			color: green;
+		}
+		.red {
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<input type="text" id="input-field-1" class="input-field">
+	<input type="text" id="input-field-2" class="input-field" disabled>
+	<input type="text" id="input-field-3" class="input-field" disabled>
+	<script>
+		const inputField1 = document.getElementById('input-field-1');
+		const inputField2 = document.getElementById('input-field-2');
+		const inputField3 = document.getElementById('input-field-3');
+		const comb1 = '{{ comb1 }}';
+		const comb2 = '{{ comb2 }}';
+		const comb3 = '{{ comb3 }}';
+		const correctLetters1 = comb1;
+		const correctLetters2 = comb2;
+		const correctLetters3 = comb3;
+		let currentIndex1 = 0;
+		let currentIndex2 = 0;
+		let currentIndex3 = 0;
+
+		inputField1.addEventListener('input', () => {
+			const currentLetter = inputField1.value[currentIndex1];
+			const correctLetter = correctLetters1[currentIndex1];
+
+			inputField1.classList.remove('green');
+			inputField1.classList.remove('red');
+
+			if (currentLetter === correctLetter) {
+				inputField1.classList.add('green');
+				if (currentIndex1 === inputField1.value.length - 1 && inputField1.value === correctLetters1) {
+					inputField2.disabled = false;
+					inputField2.focus();
+				}
+			} else {
+				inputField1.classList.add('red');
+			}
+
+			currentIndex1++;
+		});
+
+		inputField2.addEventListener('input', () => {
+			const currentLetter = inputField2.value[currentIndex2];
+			const correctLetter = correctLetters2[currentIndex2];
+
+			inputField2.classList.remove('green');
+			inputField2.classList.remove('red');
+
+			if (currentLetter === correctLetter) {
+				inputField2.classList.add('green');
+				if (currentIndex2 === inputField2.value.length - 1 && inputField2.value === correctLetters2) {
+					inputField3.disabled = false;
+					inputField3.focus();
+				}
+			} else {
+				inputField2.classList.add('red');
+			}
+
+			currentIndex2++;
+		});
+
+		inputField3.addEventListener('input', () => {
+			const currentLetter = inputField3.value[currentIndex3];
+			const correctLetter = correctLetters3[currentIndex3];
+
+			inputField3.classList.remove('green');
+			inputField3.classList.remove('red');
+
+			if (currentLetter === correctLetter) {
+				inputField3.classList.add('green');
+				if (currentIndex3 === inputField3.value.length - 1) {
+					inputField3.disabled = true;
+				}
+			} else {
+				inputField3.classList.add('red');
+			}
+
+			currentIndex3++;
+		});
+	</script>
+</body>
+{% endblock %}
