@@ -8,12 +8,11 @@ db.serialize(() => {
   db.run(`CREATE TABLE IF NOT EXISTS levels (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     combination1 TEXT,
-    combination2 TEXT,
-    combination3 TEXT,
     max_errors INTEGER
   )`);
-  db.run(`INSERT INTO levels (combination1, combination2, combination3, max_errors) VALUES ('fjfj', 'ffjj', 'jffj', 5)`)
-  db.run(`INSERT INTO levels (combination1, combination2, combination3, max_errors) VALUES ('dkdk', 'ddkk', 'kddk', 5)`)
+  db.run(`INSERT INTO levels (combination1, max_errors) VALUES ('fjfj jfjf fjjf jffj fjjj jfff jjfjf fjjfjf fjj jf fjjfj fjjjfjf jjf j ffj jf', 5)`);
+  db.run(`INSERT INTO levels (combination1, max_errors) VALUES ('dkdk kdkd dkkd kddk kdd dkkdk kddk kkkddkd kdk k dd dk dkkd kkddk kddkkdd kdkddk kdk k', 5)`);
+  db.run(`INSERT INTO levels (combination1, max_errors) VALUES ('dk jd fk jk dj kf kd kd jf jf dj kf kj jd fj kf jd jf kf dj jf kf dj kd fj kj dj fj', 5)`);
 });
 
 // close the database
