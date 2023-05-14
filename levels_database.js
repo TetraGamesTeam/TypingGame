@@ -13,6 +13,7 @@ db.serialize(() => {
     max_errors INTEGER
   )`);
   db.run(`INSERT INTO levels (combination1, combination2, combination3, max_errors) VALUES ('fjfj', 'ffjj', 'jffj', 5)`)
+  db.run(`INSERT INTO levels (combination1, combination2, combination3, max_errors) VALUES ('dkdk', 'ddkk', 'kddk', 5)`)
 });
 
 // close the database

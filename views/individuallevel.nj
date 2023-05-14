@@ -40,7 +40,7 @@
 		let currentIndex3 = 0;
 
 		inputField1.addEventListener('input', () => {
-			const currentLetter = inputField1.value[currentIndex1];
+			const currentLetter = inputField1.value[currentIndex1]; 
 			const correctLetter = correctLetters1[currentIndex1];
 
 			inputField1.classList.remove('green');
