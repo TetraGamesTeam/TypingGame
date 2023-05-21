@@ -22,20 +22,20 @@
 		</style>
 	</head>
 	<body>
-		<p class="stringgreen"></p>
-		<p class="stringred"></p>
+		<p class="stringgreen" style="color: green; font-family: 'Courier Prime', monospace;"></p>
+		<p class="stringred" style="color: red; font-family: 'Courier Prime', monospace;"></p>
 		<input type="text" id="input-field-1" class="input-field" placeholder="{{ comb1 }}">
 		<script>
-			const inputField1 = document.getElementById('input-field-1');
+			const inputField = document.getElementById('input-field-1');
 			const comb1 = '{{ comb1 }}';
-			const correctLetters1 = comb1.split("");
-			let currentIndex1 = 0;
+			const correctLetters = comb1.split("");
+			let currentIndex = 0;
 
 			inputField1.addEventListener('input', () => {
 				const currentLetter = inputField1.value[currentIndex1];
 				const correctLetter = correctLetters1[currentIndex1];
 
-				if (currentIndex1 == inputField1.value.length - 1 && inputField1.value == correctLetters1) {
+				if (currentIndex == inputField1.value.length - 1 && inputField.value == correctLetters) {
 					alert('yes')
 				}
 			});

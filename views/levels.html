@@ -1,42 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Levels page</title>
-    <link rel="stylesheet" href="/stylesheets/levelsstyle.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=PT+Mono&display=swap" rel="stylesheet">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Levels page</title>
+        <link rel="stylesheet" href="/stylesheets/levelsstyle.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=PT+Mono&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@700&display=swap" rel="stylesheet">
+    </head>
 
-<body>
-    <div class="wrapper">    
-        <main>
-            <nav class="navbar">
-                <img src="/images/27938363 (1).jpg" class="logo">
-                <b class="navbartext">Levels</b>
-                <b class="navbartext">Leaderboards</b>
-                <b class="navbartext">Contacts</b>
-                <img src="/images/login.png" class="navicons">
-                <img src="/images/darkmode.png" class="navicons">
-            </nav> 
-            <body>
-                {% block content %}{% endblock %}
-            </body>
+    <body>
+        <div class="wrapper">
+            <main>
+                <nav class="navbar">
+                    <img src="/images/27938363 (1).jpg" class="logo">
+                    <b class="navbartext">Levels</b>
+                    <b class="navbartext">Leaderboards</b>
+                    <b class="navbartext">Contacts</b>
+                    <img src="/images/login.png" class="navicons">
+                    <img src="/images/darkmode.png" class="navicons">
+                </nav>
+                <body>
+                    {% block content %}{% endblock %}
+                </body>
 
-        </main>
-        <div class="levelsstorage">
-            <div class="levelbox"></div>
+            </main>
+            <div class="levelsstorage">
+                <div class="levelbox"></div>
+            </div>
+            <footer>
+                <b id="footertext">©TetraGames Team, 2023</b>
+            </footer>
         </div>
-        <footer>
-            <b id="footertext">©TetraGames Team, 2023</b>
-        </footer>
-    </div>
 
-</body>
-
+    </body>
 
 </html>
