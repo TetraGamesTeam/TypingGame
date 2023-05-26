@@ -2,6 +2,7 @@
 
 {% block content %}
 	<head>
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		<title>HTML поле для ввода с проверкой</title>
 		<style>
 			.input-field {
@@ -22,7 +23,7 @@
 		</style>
 	</head>
 	<body>
-		<p class="stringgreen" style="color: green; font-family: 'Courier Prime', monospace;"></p>
+		<p class="stringgreen" style="color: green; font-family: 'Courier Prime', monospace; background-color: red; height: 150px; width: 300px; margin-top: 500px;">ayo</p>
 		<p class="stringred" style="color: red; font-family: 'Courier Prime', monospace;"></p>
 		<input type="text" id="input-field-1" class="input-field" placeholder="{{ comb1 }}">
 		<script>
@@ -30,13 +31,36 @@
 			const comb1 = '{{ comb1 }}';
 			const correctLetters = comb1.split("");
 			let currentIndex = 0;
+			let currentString = '';
 
-			inputField1.addEventListener('input', () => {
-				const currentLetter = inputField1.value[currentIndex1];
-				const correctLetter = correctLetters1[currentIndex1];
+			$(document).ready(function () {
+				$('#input-field-1').on('input', function () {
+					var inputVal = $(this).val();
+					$('.stringgreen').text(currentString);
+				});
+			});
 
-				if (currentIndex == inputField1.value.length - 1 && inputField.value == correctLetters) {
-					alert('yes')
+			inputField.addEventListener('input', () => {
+				const currentLetter = inputField.value[currentIndex];
+				const correctLetter = correctLetters[currentIndex];
+
+				if (currentLetter == correctLetter) {
+					currentString += currentLetter;
+					currentIndex++;
+					inputField.classList.remove('red');
+					inputField.classList.add('green');
+				} else if (currentLetter) {
+					currentString += ' ';
+					inputField.classList.remove('green');
+					inputField.classList.add('red');
+				} else {
+					currentString = currentString.slice(0, -1);
+				}
+
+				$('.stringgreen').text(currentString);
+
+				if (currentIndex == correctLetters.length) {
+					alert('yes');
 				}
 			});
 		</script>
