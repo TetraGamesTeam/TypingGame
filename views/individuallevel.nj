@@ -1,68 +1,67 @@
 {% extends 'levels.html' %}
 
 {% block content %}
-	<head>
-		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-		<title>HTML поле для ввода с проверкой</title>
-		<style>
-			.input-field {
-				font-size: 24px;
-				padding: 10px;
-				border: 1px solid black;
-				background-image: url("background.jpg");
-				background-size: contain;
-				background-repeat: no-repeat;
-				background-position: center;
-			}
-			.green {
-				color: green;
-			}
-			.red {
-				color: red;
-			}
-		</style>
-	</head>
-	<body>
-		<p class="stringgreen" style="color: green; font-family: 'Courier Prime', monospace; background-color: red; height: 150px; width: 300px; margin-top: 500px;">ayo</p>
-		<p class="stringred" style="color: red; font-family: 'Courier Prime', monospace;"></p>
-		<input type="text" id="input-field-1" class="input-field" placeholder="{{ comb1 }}">
-		<script>
-			const inputField = document.getElementById('input-field-1');
-			const comb1 = '{{ comb1 }}';
-			const correctLetters = comb1.split("");
-			let currentIndex = 0;
-			let currentString = '';
+<head>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<title>Поле ввода с проверкой</title>
+	<style>
+		.input-field {
+			font-size: 24px;
+			padding: 10px;
+			border: 1px solid black;
+			background-image: url("background.jpg");
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: center;
+		}
+		.green {
+			color: green;
+		}
+		.red {
+			color: red;
+		}
+	</style>
+</head>
 
-			$(document).ready(function () {
-				$('#input-field-1').on('input', function () {
-					var inputVal = $(this).val();
-					$('.stringgreen').text(currentString);
-				});
-			});
+<body>
+	<p class="green-string" style="color: green; font-family: 'Courier Prime', monospace;"></p>
+	<p class="red-string" style="color: red; font-family: 'Courier Prime', monospace;"></p>
+	<input type="text" id="input-field-1" class="input-field" placeholder="{{ comb1 }}">
+	<script>
+		const inputField = document.getElementById('input-field-1');
+		const correctString = '{{ comb1 }}';
+		let currentString = '';
 
-			inputField.addEventListener('input', () => {
-				const currentLetter = inputField.value[currentIndex];
-				const correctLetter = correctLetters[currentIndex];
+		function updateStrings() {
+			const greenString = [];
+			const redString = [];
 
-				if (currentLetter == correctLetter) {
-					currentString += currentLetter;
-					currentIndex++;
-					inputField.classList.remove('red');
-					inputField.classList.add('green');
-				} else if (currentLetter) {
-					currentString += ' ';
-					inputField.classList.remove('green');
-					inputField.classList.add('red');
+			for (let i = 0; i < currentString.length; i++) {
+				if (currentString[i] == correctString[i]) {
+					greenString.push(currentString[i]);
+					redString.push(' ');
 				} else {
+					greenString.push(' ');
+					redString.push(currentString[i]);
+				}
+			}
+
+			$('.green-string').text(greenString.join(''));
+			$('.red-string').text(redString.join(''));
+		}
+
+		$(document).ready(function () {
+			$('#input-field-1').on('input', function () {
+				const inputVal = $(this).val();
+				if (inputVal.length < currentString.length) {
 					currentString = currentString.slice(0, -1);
+				} else {
+					currentString += inputVal[inputVal.length - 1];
 				}
-
-				$('.stringgreen').text(currentString);
-
-				if (currentIndex == correctLetters.length) {
-					alert('yes');
-				}
+				updateStrings();
 			});
-		</script>
-	</body>
+			updateStrings();
+		});
+	</script>
+</body>
 {% endblock %}
