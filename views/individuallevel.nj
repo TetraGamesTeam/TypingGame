@@ -2,66 +2,83 @@
 
 {% block content %}
 <head>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<title>Поле ввода с проверкой</title>
-	<style>
-		.input-field {
-			font-size: 24px;
-			padding: 10px;
-			border: 1px solid black;
-			background-image: url("background.jpg");
-			background-size: contain;
-			background-repeat: no-repeat;
-			background-position: center;
-		}
-		.green {
-			color: green;
-		}
-		.red {
-			color: red;
-		}
-	</style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Проверка комбинации</title>
+    <style>
+        .green {
+            color: green;
+        }
+        .red {
+            color: red;
+        }
+        .string {
+            margin-top: 15px;
+        }
+    </style>
 </head>
-
 <body>
-	<p class="green-string" style="color: green; font-family: 'Courier Prime', monospace;"></p>
-	<p class="red-string" style="color: red; font-family: 'Courier Prime', monospace;"></p>
-	<input type="text" id="input-field-1" class="input-field" placeholder="{{ comb1 }}">
-	<script>
-		const inputField = document.getElementById('input-field-1');
-		const correctString = '{{ comb1 }}';
-		let currentString = '';
+    <h1>Введите комбинацию:</h1>
+    <input type="text" id="code-input">
+    <button id="check-button">Проверить</button>
 
-		function updateStrings() {
-			const greenString = [];
-			const redString = [];
+    <p class="string green-string"></p>
+    <p class="string red-string"></p>
+    <p class="string next-string"></p>
 
-			for (let i = 0; i < currentString.length; i++) {
-				if (currentString[i] == correctString[i]) {
-					greenString.push(currentString[i]);
-					redString.push(' ');
-				} else {
-					greenString.push(' ');
-					redString.push(currentString[i]);
-				}
-			}
+    <script>
+        const correctCombination = "{{ comb1 }}";
+        const chars = correctCombination.split("");
+        let currentString = "";
 
-			$('.green-string').text(greenString.join(''));
-			$('.red-string').text(redString.join(''));
-		}
+        const greenString = $(".green-string");
+        const redString = $(".red-string");
+        const nextString = $(".next-string");
 
-		$(document).ready(function () {
-			$('#input-field-1').on('input', function () {
-				const inputVal = $(this).val();
-				if (inputVal.length < currentString.length) {
-					currentString = currentString.slice(0, -1);
-				} else {
-					currentString += inputVal[inputVal.length - 1];
-				}
-				updateStrings();
-			});
-			updateStrings();
-		});
-	</script>
+        if ($('#code-input').val() === '') {
+            greenString.text("");
+            redString.text("");
+            nextString.text(chars[0]);
+        } else {
+            for (let i = 0; i < chars.length; i++) {
+                greenString.append("_");
+                redString.append(" ");
+            }
+            nextString.text(chars[currentString.length]);
+        }
+
+        $("#code-input").on("input", function () {
+            const val = $(this).val().toLowerCase();
+
+            if (val.length < currentString.length) {
+                greenString.text(greenString.text().slice(0, -1));
+                redString.text(redString.text().slice(0, -1));
+            } else {
+                if (val.length > chars.length) {
+                    val = val.slice(0, chars.length);
+                }
+
+                const lastChar = val[val.length - 1];
+
+                if (lastChar === chars[val.length - 1]) {
+                    greenString.append("_");
+                    redString.append(" ");
+                } else {
+                    greenString.append(" ");
+                    redString.append("_");
+                }
+            }
+
+            currentString = val;
+            nextString.text(chars[currentString.length]);
+        });
+
+        $("#check-button").on("click", function () {
+            if (currentString === correctCombination) {
+                alert("Верно!");
+            } else {
+                alert("Неверно, попробуйте еще раз.");
+            }
+        });
+    </script>
 </body>
 {% endblock %}
