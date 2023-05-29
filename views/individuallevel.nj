@@ -1,84 +1,79 @@
 {% extends 'levels.html' %}
 
 {% block content %}
-<head>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <title>Проверка комбинации</title>
-    <style>
-        .green {
-            color: green;
-        }
-        .red {
-            color: red;
-        }
-        .string {
-            margin-top: 15px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Введите комбинацию:</h1>
-    <input type="text" id="code-input">
-    <button id="check-button">Проверить</button>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" href="/stylesheets/individuallevelsstyling.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" href="/stylesheets/individuallevelsstyling.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap" rel="stylesheet">
+        <title>Проверка комбинации</title>
+    </head>
+    <body>
+        <h1>Введите комбинацию:</h1>
 
-    <p class="string green-string"></p>
-    <p class="string red-string"></p>
-    <p class="string next-string"></p>
+        <container class="stringcheck">
+            <input type="text" id="code-input">
+            <p id="green" class="string green-string"></p>
+            <p id="red" class="string red-string"></p>
+            <p class="nextstringint">{{ comb1 }}</p>
+        </container>
 
-    <script>
-        const correctCombination = "{{ comb1 }}";
-        const chars = correctCombination.split("");
-        let currentString = "";
+        <p id="nextletter" class="string next-string"></p>
+        <button id="check-button">Проверить</button>
 
-        const greenString = $(".green-string");
-        const redString = $(".red-string");
-        const nextString = $(".next-string");
+        <script>
+            const correctCombination = "{{ comb1 }}";
+            const chars = correctCombination.split("");
+            let currentString = "";
 
-        if ($('#code-input').val() === '') {
-            greenString.text("");
-            redString.text("");
-            nextString.text(chars[0]);
-        } else {
-            for (let i = 0; i < chars.length; i++) {
-                greenString.append("_");
-                redString.append(" ");
+            const greenString = $(".green-string");
+            const redString = $(".red-string");
+            const nextString = $(".next-string");
+
+            if ($('#code-input').val() === '') {
+                greenString.text("");
+                redString.text("");
+                nextString.text(chars[0]);
             }
-            nextString.text(chars[currentString.length]);
-        }
 
-        $("#code-input").on("input", function () {
-            const val = $(this).val().toLowerCase();
+            $("#code-input").on("input", function () {
+                const val = $(this)
+                    .val()
+                    .toLowerCase();
 
-            if (val.length < currentString.length) {
-                greenString.text(greenString.text().slice(0, -1));
-                redString.text(redString.text().slice(0, -1));
-            } else {
-                if (val.length > chars.length) {
-                    val = val.slice(0, chars.length);
-                }
-
-                const lastChar = val[val.length - 1];
-
-                if (lastChar === chars[val.length - 1]) {
-                    greenString.append("_");
-                    redString.append(" ");
+                if (val.length < currentString.length) {
+                    greenString.text(greenString.text().slice(0, -1));
+                    redString.text(redString.text().slice(0, -1));
                 } else {
-                    greenString.append(" ");
-                    redString.append("_");
+                    if (val.length > chars.length) {
+                        val = val.slice(0, chars.length);
+                    }
+
+                    const lastChar = val[val.length - 1];
+
+                    if (lastChar === chars[val.length - 1]) {
+                        greenString.append("_");
+                        redString.append("*");
+                    } else {
+                        greenString.append("*");
+                        redString.append("_");
+                    }
                 }
-            }
 
-            currentString = val;
-            nextString.text(chars[currentString.length]);
-        });
+                currentString = val;
+                nextString.text(chars[currentString.length]);
+            });
 
-        $("#check-button").on("click", function () {
-            if (currentString === correctCombination) {
-                alert("Верно!");
-            } else {
-                alert("Неверно, попробуйте еще раз.");
-            }
-        });
-    </script>
-</body>
+            $("#check-button").on("click", function () {
+                if (currentString === correctCombination) {
+                    alert("Верно!");
+                } else {
+                    alert("Неверно, попробуйте еще раз.");
+                }
+            });
+        </script>
+    </body>
 {% endblock %}
