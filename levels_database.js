@@ -5,7 +5,7 @@ let db = new sqlite3.Database('lvlsdb.sqlite');
 
 // create the levels table
 db.serialize(() => {
-  db.run(`CREATE TABLE IF NOT EXISTS levels (
+  db.run(`CREATE TABLE levels (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     combination1 TEXT,
     max_errors INTEGER
