@@ -27,6 +27,7 @@ function requireLoggedIn(req, res, next) {
     next();
   }
 }
+
 router.get('/', requireLoggedIn, (req, res) => {
   const username = req.session.username;
 

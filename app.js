@@ -2,12 +2,13 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const app = express();
+const nunjucks = require('nunjucks');
+
+
 const session = require('express-session');
 const crypto = require('crypto');
 const seckey = crypto.randomBytes(32).toString('hex');
-
-const app = express();
-const nunjucks = require('nunjucks');
 
 app.use(session({
   secret: seckey,
@@ -15,7 +16,6 @@ app.use(session({
   saveUninitialized: false
 }));
 
-// Configure Nunjucks
 nunjucks.configure(__dirname + '/views', {
   autoescape: true,
   express: app
