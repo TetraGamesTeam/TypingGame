@@ -56,7 +56,21 @@ router.get('/:id', requireLoggedIn, (req, res) => {
       max_errors: row.max_errors,
       loggedIn
     });
-    console.log("Page rendered: Individual Level")
+    console.log("Page rendered: Individual Level");
+    
+    if (loggedIn && req.session.completedLevels.includes(parseInt(id))) {
+      const currentLevelNumber = parseInt(id);
+      const nextLevelNumber = currentLevelNumber + 1;
+      const username = req.session.username;
+
+      db.run(`UPDATE users SET lastlevel = ? WHERE username = ?`, [nextLevelNumber, username], (err) => {
+        if (err) {
+          console.error(err.message);
+          return;
+        }
+        console.log(`Last level for user ${username} updated to ${nextLevelNumber}`);
+      });
+    }
   });
 });
 
