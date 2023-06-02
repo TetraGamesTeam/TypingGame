@@ -19,12 +19,12 @@
         <div class="wrapper">
             <main>
                 <nav class="navbar">
-                    <img src="/images/27938363 (1).jpg" class="logo">
+                    <img src="/images/27938363 (1).jpg" class="logo"/>
                     <b class="navbartext">Levels</b>
                     <b class="navbartext">Leaderboards</b>
                     <b class="navbartext">Contacts</b>
-                    <img src="/images/login.png" class="navicons">
-                    <img src="/images/darkmode.png" class="navicons">
+                    <img src="/images/login.png" class="navicons ${loggedIn ? 'loggedIn' : 'loggedOut'}"/>
+                    <img src="/images/darkmode.png" class="navicons"/>
                 </nav>
                 <body>
                     {% block content %}{% endblock %}

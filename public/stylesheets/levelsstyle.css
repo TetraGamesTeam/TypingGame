@@ -97,3 +97,12 @@ footer {
     position: absolute;
     margin-top: 40px;
 }
+
+.loggedOut {
+    cursor: pointer;
+  }
+  
+  .loggedIn {
+    cursor: default;
+    background-color: green;
+  }

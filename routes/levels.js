@@ -17,17 +17,26 @@ app.use(session({
   saveUninitialized: true
 }));
 
+function requireLoggedIn(req, res, next) {
+  if (!req.session.username) {
+    res.redirect('/login');
+  } else {
+    next();
+  }
+}
 
-app.get('/', requireLoggedIn, (req, res) => {
+router.get('/', requireLoggedIn, (req, res) => {
   db.all('SELECT * FROM levels', [], (err, rows) => {
     if (err) {
       throw err;
     }
-    res.render('levels.nj', { levels: rows });
+    const loggedIn = !!req.session.username;
+    res.render('levels.nj', { levels: rows, loggedIn });
+    console.log("Page rendered: Levels")
   });
 });
 
-app.get('/:id', requireLoggedIn, (req, res) => {
+router.get('/:id', requireLoggedIn, (req, res) => {
   const id = req.params.id;
   db.all('SELECT * FROM levels where id = ?', [id], (err, rows) => {
     if (err) {
@@ -40,70 +49,14 @@ app.get('/:id', requireLoggedIn, (req, res) => {
       return;
     }
     const row = rows[0];
+    const loggedIn = !!req.session.username;
     res.render('individuallevel.nj', {
       id: row.id,
       comb1: row.combination1,
-      max_errors: row.max_errors
+      max_errors: row.max_errors,
+      loggedIn
     });
-  });
-});
-
-function requireLoggedIn(req, res, next) {
-  if (!req.session.username) {
-    res.redirect('/registration');
-  } else {
-    next();
-  }
-}
-
-app.get('/', (req, res) => {
-  res.render('levels.nj');
-});
-
-app.get('/registration', (req, res) => {
-  res.render('registration.nj');
-});
-
-
-app.post('/login', (req, res) => {
-  const username = req.body.username;
-  const password = req.body.password;
-
-  db.get(`SELECT id, username FROM users WHERE username=? AND password=?`, [username, password], (err, row) => {
-    if (err) {
-      console.log(err.message);
-      res.sendStatus(500);
-    } else if (!row) {
-      res.sendStatus(401);
-    } else {
-      req.session.username = username;
-      res.redirect('/');
-    }
-  });
-});
-
-app.post('/registration', (req, res) => {
-  const username = req.body.username;
-  const password = req.body.password;
-
-  db.run(`INSERT INTO users (username, password, lastlevel) VALUES (?, ?, ?)`, [username, password, 1], function (err) {
-    if (err) {
-      console.log(err.message);
-      res.sendStatus(500);
-    } else {
-      req.session.username = username;
-      res.redirect('/');
-    }
-  });
-});
-
-
-router.get('/', requireLoggedIn, (req, res) => {
-  db.all('SELECT * FROM levels', [], (err, rows) => {
-    if (err) {
-      throw err;
-    }
-    res.render('levels.nj', { levels: rows });
+    console.log("Page rendered: Individual Level")
   });
 });
 
