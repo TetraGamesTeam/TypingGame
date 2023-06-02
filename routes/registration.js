@@ -22,7 +22,7 @@ router.post('/', (req, res) => {
             console.log("\x1b[35m\x1b[1m" + `User ${username} with password ${password} just created a new account.` + "\x1b[0m");
             res.redirect('/levels');
             console.log("\x1b[34m\x1b[1m" + `Redirecting to /levels` + "\x1b[0m");
-        }
+        } 
     });
 });
 
