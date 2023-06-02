@@ -23,6 +23,7 @@ app.use(session({
 function requireLoggedIn(req, res, next) {
   if (!req.session.username) {
     res.redirect('/login');
+    console.log("\x1b[34m\x1b[1m" + `Redirecting to /login` + "\x1b[0m");
   } else {
     next();
   }
@@ -49,7 +50,7 @@ router.get('/', requireLoggedIn, (req, res) => {
       const loggedIn = !!req.session.username;
 
       res.render('levels.nj', { levels: rows, loggedIn, lastlevel });
-      console.log("Page rendered: Levels");
+      console.log("\x1b[34m\x1b[1m" + `Page levels.nj requested` + "\x1b[0m");
     });
   });
 });
@@ -74,7 +75,7 @@ router.get('/:id', requireLoggedIn, (req, res) => {
       max_errors: row.max_errors,
       loggedIn
     });
-    console.log("Page rendered: Individual Level");
+    console.log("\x1b[34m\x1b[1m" + `Page individuallevel.nj with an input of ${id} requested` + "\x1b[0m");
     
     if (loggedIn && req.session.completedLevels && req.session.completedLevels.includes(parseInt(id))) {
       const currentLevelNumber = parseInt(id);

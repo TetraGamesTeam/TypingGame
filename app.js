@@ -44,7 +44,7 @@ app.use('/login', logRouter)
 
 // Запуск сервера
 app.listen(port, () => {
-    console.log(`Server listening on port ${port}`);
+  console.log("\x1b[33m\x1b[1m" + `Server is up and listening on port ${port}` + "\x1b[0m");
 });
 
 module.exports = app;
