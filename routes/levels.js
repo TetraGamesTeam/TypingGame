@@ -3,6 +3,8 @@ const router = express.Router();
 const sqlite3 = require('sqlite3').verbose();
 const app = express();
 const session = require('express-session');
+const crypto = require('crypto');
+const seckey = crypto.randomBytes(32).toString('hex');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -12,10 +14,11 @@ app.use('/static', express.static(__dirname + '/static'));
 const db = new sqlite3.Database(__dirname + '/lvlsdb.sqlite');
 
 app.use(session({
-  secret: 'my-secret',
+  secret: seckey,
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: false
 }));
+
 
 function requireLoggedIn(req, res, next) {
   if (!req.session.username) {
@@ -24,15 +27,29 @@ function requireLoggedIn(req, res, next) {
     next();
   }
 }
-
 router.get('/', requireLoggedIn, (req, res) => {
+  const username = req.session.username;
+
   db.all('SELECT * FROM levels', [], (err, rows) => {
     if (err) {
-      throw err;
+      console.log(err);
+      res.status(500).send('Internal Server Error');
+      return;
     }
-    const loggedIn = !!req.session.username;
-    res.render('levels.nj', { levels: rows, loggedIn });
-    console.log("Page rendered: Levels")
+
+    db.get('SELECT lastlevel FROM users WHERE username = ?', [username], (err, row) => {
+      if (err) {
+        console.log(err);
+        res.status(500).send('Internal Server Error');
+        return;
+      }
+
+      const lastlevel = row.lastlevel || 0;
+      const loggedIn = !!req.session.username;
+
+      res.render('levels.nj', { levels: rows, loggedIn, lastlevel });
+      console.log("Page rendered: Levels");
+    });
   });
 });
 
@@ -58,11 +75,11 @@ router.get('/:id', requireLoggedIn, (req, res) => {
     });
     console.log("Page rendered: Individual Level");
     
-    if (loggedIn && req.session.completedLevels.includes(parseInt(id))) {
+    if (loggedIn && req.session.completedLevels && req.session.completedLevels.includes(parseInt(id))) {
       const currentLevelNumber = parseInt(id);
       const nextLevelNumber = currentLevelNumber + 1;
       const username = req.session.username;
-
+    
       db.run(`UPDATE users SET lastlevel = ? WHERE username = ?`, [nextLevelNumber, username], (err) => {
         if (err) {
           console.error(err.message);
@@ -70,7 +87,7 @@ router.get('/:id', requireLoggedIn, (req, res) => {
         }
         console.log(`Last level for user ${username} updated to ${nextLevelNumber}`);
       });
-    }
+    }    
   });
 });
 

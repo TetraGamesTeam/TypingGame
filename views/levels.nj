@@ -3,9 +3,11 @@
 {% block content %}
   <h1>Levels</h1>
   {% for level in levels %}
-    <div class="leveltile">
-      <p class="levelh1">Level {{ level.id }}</p>
-      <a href="/levels/{{ level.id }}" class="levelbutton">Go to level</a>
-    </div>
+    {% if level.id <= lastlevel %}
+      <div class="leveltile">
+        <p class="levelh1">Level {{ level.id }}</p>
+        <a href="/levels/{{ level.id }}" class="levelbutton">Go to level</a>
+      </div>
+    {% endif %}
   {% endfor %}
-{% endblock %} 
+{% endblock %}
